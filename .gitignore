@@ -2,4 +2,4 @@
 *.h5
 data/*
 !data/README.md
-.caffemodel
+*.caffemodel
