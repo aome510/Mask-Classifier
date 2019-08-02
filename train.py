@@ -9,7 +9,7 @@ from keras.applications.inception_resnet_v2 import InceptionResNetV2
 from func import tf_init, plot_training, get_model_memory_usage
 
 
-def train(type):  # we deploy two networks resnet50 and inceptionresnet_v2
+def train(type):  # we deploy only two networks resnet50 and inceptionresnet_v2
     if type == 'resnet50':
         csize = 224
         batch_size = 32

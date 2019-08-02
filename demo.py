@@ -77,11 +77,12 @@ def demo_from_dir(dir, net):
         im_show(img)
 
 
-def demo_video(net, video_path=0, out_dir='./data/videos/output.avi', visualize=False):
+def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output.avi', visualize=False):
     cap = cv2.VideoCapture(video_path)
 
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    out = None
+    if save_out:
+        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        out = None
 
     while (cap.isOpened()):
         ret, frame = cap.read()
@@ -89,17 +90,17 @@ def demo_video(net, video_path=0, out_dir='./data/videos/output.avi', visualize=
         if frame is not None and frame.shape[0] > 0 and frame.shape[1] > 0:
             start_time = time.time()
 
-            # with video we don't use pyramid option to improve performance
+            # with videos we don't use pyramid option to improve performance
             bboxs = detect(net, im=frame)[0]
             frame = draw(None, bboxs, img=frame)
 
             print("FPS: ", 1.0 / (time.time() - start_time))
 
-            if out is None:
+            if save_out and out is None:
                 out = cv2.VideoWriter(
-                    out_dir, fourcc, 20.0,
+                    out_path, fourcc, 20.0,
                     (frame.shape[1], frame.shape[0]))
-            out.write(frame)
+                out.write(frame)
 
             if visualize:
                 max_size = 1024
@@ -122,4 +123,8 @@ def demo_video(net, video_path=0, out_dir='./data/videos/output.avi', visualize=
 
 if __name__ == "__main__":
     net = SSH_init()
-    demo_video(net, './data/videos/demo.MOV', visualize=True)
+
+    demo_video(net, visualize=True)
+    
+    # uncomment below to run demo on video
+    # demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
