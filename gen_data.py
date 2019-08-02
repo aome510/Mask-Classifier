@@ -198,7 +198,7 @@ def gen_data_mask_classifier():
     try:
         print('gen data mask classifier')
 
-        dir = './data/mask_classfier/'
+        dir = './data/mask_classifier/'
         label_from_dir(dir)
 
         os.system('cat {} > {}'.format(dir + '/labels/*.txt', dir + 'imglist.txt'))
