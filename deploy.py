@@ -9,8 +9,8 @@ from keras.applications import resnet50, inception_resnet_v2
 from keras.applications.resnet50 import ResNet50
 
 tf_init()
-model = load_model('./model/snapshot/resnet50-44-0.113-0.967.h5')
-type = 'resnet50'
+model = load_model('./model/snapshot/resnet50.h5')
+model_type = 'resnet50'
 csize = 224
 
 def classify(img_path, thresh=0.5):
@@ -20,7 +20,7 @@ def classify(img_path, thresh=0.5):
         load_img(img_path, target_size=(csize, csize))
     )
     img_arr = np.expand_dims(img_arr, axis=0)
-    if type == 'resnet50':
+    if model_type == 'resnet50':
         img_arr = resnet50.preprocess_input(img_arr)
     else:
         img_arr = inception_resnet_v2.preprocess_input(img_arr)
@@ -51,7 +51,7 @@ def classify_from_file(file_path, thresh=0.5, batch_size=32):
             load_img(img_path, target_size=(csize, csize))
         )
         img_arr = np.expand_dims(img_arr, axis=0)
-        if type == 'resnet50':
+        if model_type == 'resnet50':
             img_arr = resnet50.preprocess_input(img_arr)
         else:
             img_arr = inception_resnet_v2.preprocess_input(img_arr)
@@ -93,4 +93,4 @@ def classify_from_file(file_path, thresh=0.5, batch_size=32):
 
 
 if __name__ == "__main__":
-    classify_from_file('../MAFA/data/test.txt')
+    classify_from_file('./data/test.txt')

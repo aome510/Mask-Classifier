@@ -122,4 +122,4 @@ def demo_video(net, video_path=0, out_dir='./data/videos/output/output.avi', vis
 
 if __name__ == "__main__":
     net = SSH_init()
-    demo_video(net, '/home/khainb/G3/Mask Classifier/data/videos/demo2.MOV', visualize=True)
+    demo_video(net, './data/videos/demo.MOV', visualize=True)
