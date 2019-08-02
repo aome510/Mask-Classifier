@@ -77,7 +77,7 @@ def demo_from_dir(dir, net):
         im_show(img)
 
 
-def demo_video(net, video_path=0, out_dir='./data/videos/output/output.avi', visualize=False):
+def demo_video(net, video_path=0, out_dir='./data/videos/output.avi', visualize=False):
     cap = cv2.VideoCapture(video_path)
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
