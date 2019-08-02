@@ -26,13 +26,13 @@ pip install -r requirements.txt
 
 <a name="demo"></a>
 ## Running the demo
-To run the demo, first you need to download the pre-trained mask classifier model from [here](https://drive.google.com/drive/folders/1twHxN7oIIjFDQQ3VQyb9bsd6oVjRubW4) and save it into a folder named ```model/```.
+To run the demo, first you need to download the pre-trained mask classifier model from [here](https://drive.google.com/drive/folders/1twHxN7oIIjFDQQ3VQyb9bsd6oVjRubW4) and then save it into a folder named ```model/```.
 
 After downloading the model, you can run demo on webcam with:
 ```
 python demo.py
 ```
-If you want to demo on videos, you can download our demo videos from [here](https://drive.google.com/drive/folders/1PSw1eDErcjLaOkIUxYXbLEacBNdaMjHQ) and save it into a folder named ```data/videos/```. After that, you can modify ```demo.py``` file to run demo on videos.
+If you want to demo on videos, you can download our demo videos from [here](https://drive.google.com/drive/folders/1PSw1eDErcjLaOkIUxYXbLEacBNdaMjHQ) and then save it into a folder named ```data/videos/```. After that, you can modify ```demo.py``` file to run demo on videos.
 
 <a name="train"></a>
 ## Training a model
@@ -41,17 +41,17 @@ If you want to demo on videos, you can download our demo videos from [here](http
 
 1. CelebA dataset:
 
-    You can download CelebA dataset from [here](https://www.kaggle.com/jessicali9530/celeba-dataset) and save it into a folder named ```data/celebA/```
+    You can download CelebA dataset from [here](https://www.kaggle.com/jessicali9530/celeba-dataset) and then save it into a folder named ```data/celebA/```
 
 2. WiderFace dataset:
     
-    You can download WiderFace dataset from [here](https://drive.google.com/open?id=16a0TSvPI_3up7tbblxTHxXj5hZ9N7RyH) and save it into a folder named ```data/WiderFace/```
+    You can download WiderFace dataset from [here](https://drive.google.com/open?id=16a0TSvPI_3up7tbblxTHxXj5hZ9N7RyH) and then save it into a folder named ```data/WiderFace/```
 3. MAFA dataset:
     
-    You can download MAFA dataset from [here](https://drive.google.com/drive/folders/1nbtM1n0--iZ3VVbNGhocxbnBGhMau_OG) and save it into a folder named ```data/MAFA/```
+    You can download MAFA dataset from [here](https://drive.google.com/drive/folders/1nbtM1n0--iZ3VVbNGhocxbnBGhMau_OG) and then save it into a folder named ```data/MAFA/```
 4. Mask Classifier dataset:
     
-    You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1goKcsB8TQ0hWUzg3DymQyR2S8da186kY) and save it into a folder name ```data/mask_classifier/```
+    You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1goKcsB8TQ0hWUzg3DymQyR2S8da186kY) and then save it into a folder name ```data/mask_classifier/```
 
 ### Combine dataset:
 After downloading all the datasets listed above you can run:
