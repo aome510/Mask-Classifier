@@ -303,7 +303,7 @@ if __name__ == '__main__':
     gen_data_celebA(16000)
     gen_data_widerface(9000)
 
-    gen_data_cropped()
+    gen_data_mask_classifier()
 
     os.system('./scripts/gen_data.sh')
 
