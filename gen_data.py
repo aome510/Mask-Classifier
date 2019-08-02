@@ -9,22 +9,22 @@ def gen_data_mask_train(min_size=500):
     try:
         print('gen train masks')
 
-        os.system('mkdir ./data/MAFA_Dataset/train_masks/')
+        os.system('mkdir ./data/MAFA/train_masks/')
         os.system(
-            'find ./data/MAFA_Dataset/train_masks/ -name "*" -type f -exec rm {} \\;')
+            'find ./data/MAFA/train_masks/ -name "*" -type f -exec rm {} \\;')
 
         mat = scipy.io.loadmat(
-            './data/MAFA_Dataset' + '/MAFA-Label-Train/LabelTrainAll.mat')['label_train']
+            './data/MAFA' + '/MAFA-Label-Train/LabelTrainAll.mat')['label_train']
         n_image_train = mat.shape[1]
 
         id = 0
-        f = open('./data/MAFA_Dataset' + '/train_masks/imglist.txt', 'w')
+        f = open('./data/MAFA' + '/train_masks/imglist.txt', 'w')
         for i in range(n_image_train):
 
             img_name = mat[0][i][1][0]
             img_data = mat[0][i][2]
 
-            img_arr = cv2.imread('./data/MAFA_Dataset' +
+            img_arr = cv2.imread('./data/MAFA' +
                                  '/train-images/images/' + img_name)
 
             for j in img_data:
@@ -41,7 +41,7 @@ def gen_data_mask_train(min_size=500):
                 id += 1
                 if id % 1000 == 0:
                     print(id, '...')
-                img_path = './data/MAFA_Dataset' + '/train_masks/train_mask_' + \
+                img_path = './data/MAFA' + '/train_masks/train_mask_' + \
                     str(id).zfill(5) + '.jpg'
                 cv2.imwrite(img_path, img_arr[y:y+h, x:x+w])
 
@@ -60,22 +60,22 @@ def gen_data_mask_test(min_size=500):
     try:
         print('gen test masks')
 
-        os.system('mkdir ./data/MAFA_Dataset/test_masks/')
+        os.system('mkdir ./data/MAFA/test_masks/')
         os.system(
-            'find ./data/MAFA_Dataset/test_masks/ -name "*" -type f -exec rm {} \\;')
+            'find ./data/MAFA/test_masks/ -name "*" -type f -exec rm {} \\;')
 
         mat = scipy.io.loadmat(
-            './data/MAFA_Dataset' + '/MAFA-Label-Test/LabelTestAll.mat')['LabelTest']
+            './data/MAFA' + '/MAFA-Label-Test/LabelTestAll.mat')['LabelTest']
         n_image_test = mat.shape[1]
 
         id = 0
-        f = open('./data/MAFA_Dataset' + '/test_masks/imglist.txt', 'w')
+        f = open('./data/MAFA' + '/test_masks/imglist.txt', 'w')
         for i in range(n_image_test):
 
             img_name = mat[0][i][0][0]
             img_data = mat[0][i][1]
 
-            img_arr = cv2.imread('./data/MAFA_Dataset' +
+            img_arr = cv2.imread('./data/MAFA' +
                                  '/test-images/images/' + img_name)
 
             for j in img_data:
@@ -94,7 +94,7 @@ def gen_data_mask_test(min_size=500):
                 id += 1
                 if id % 1000 == 0:
                     print(id, '...')
-                img_path = './data/MAFA_Dataset' + '/test_masks/test_mask_' + \
+                img_path = './data/MAFA' + '/test_masks/test_mask_' + \
                     str(id).zfill(5) + '.jpg'
 
                 cv2.imwrite(img_path, img_arr[y:y+h, x:x+w])
@@ -192,31 +192,34 @@ def label_from_dir(dir):
               dir + file_info[0] + '/', start_id)
 
 
-def gen_data_cropped():
-    print('gen data cropped')
+def gen_data_mask_classifier():
+    try:
+        print('gen data mask classifier')
 
-    dir = './data/cropped_img_from_vid/'
-    label_from_dir(dir)
+        dir = './data/mask_classfier/'
+        label_from_dir(dir)
 
-    os.system('cat {} > {}'.format(dir + '/labels/*.txt', dir + 'imglist.txt'))
+        os.system('cat {} > {}'.format(dir + '/labels/*.txt', dir + 'imglist.txt'))
 
-    files = open(dir + 'imglist.txt', 'r').readlines()
-    train = open(dir + 'imglist_train.txt', 'w')
-    test = open(dir + 'imglist_test.txt', 'w')
+        files = open(dir + 'imglist.txt', 'r').readlines()
+        train = open(dir + 'imglist_train.txt', 'w')
+        test = open(dir + 'imglist_test.txt', 'w')
 
-    files = [
-        file for file in files
-        if not file.endswith('2\n')
-    ]
+        files = [
+            file for file in files
+            if not file.endswith('2\n')
+        ]
 
-    random.shuffle(files)
-    n_files = len(files)
-    n_train = int(0.8 * n_files)
-    train.write(''.join(files[:n_train]))
-    test.write(''.join(files[n_train:n_files]))
+        random.shuffle(files)
+        n_files = len(files)
+        n_train = int(0.8 * n_files)
+        train.write(''.join(files[:n_train]))
+        test.write(''.join(files[n_train:n_files]))
 
-    train.close()
-    test.close()
+        train.close()
+        test.close()
+    except:
+        print('Please download Mask Classifier dataset')
 
 
 def gen_data_widerface(n_img, min_size=500):
