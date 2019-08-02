@@ -9,7 +9,7 @@ from keras.applications import resnet50, inception_resnet_v2
 from keras.applications.resnet50 import ResNet50
 
 tf_init()
-model = load_model('./model/resnet50.h5')
+model = load_model('./model/resnet50_v2_967.h5')
 model_type = 'resnet50'
 csize = 224
 

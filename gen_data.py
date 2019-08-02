@@ -52,7 +52,8 @@ def gen_data_mask_train(min_size=500):
 
         f.close()
 
-    except:
+    except Exception as e:
+        # print('Error:', e)
         print('Please download MAFA Dataset')
 
 
@@ -105,7 +106,8 @@ def gen_data_mask_test(min_size=500):
 
         f.close()
 
-    except:
+    except Exception as e:
+        # print('Error:', e)
         print('Please download MAFA Dataset')
 
 
@@ -218,7 +220,8 @@ def gen_data_mask_classifier():
 
         train.close()
         test.close()
-    except:
+    except Exception as e:
+        # print('Error:', e)
         print('Please download Mask Classifier dataset')
 
 
@@ -250,7 +253,8 @@ def gen_data_widerface(n_img, min_size=500):
 
         gen_data_nomask(out_dir, n_img)
 
-    except:
+    except Exception as e:
+        # print('Error:', e)
         print('Please download WiderFace dataset')
 
 
@@ -292,7 +296,8 @@ def gen_data_celebA(n_img):
 
         gen_data_nomask(out_dir, n_img)
 
-    except:
+    except Exception as e:
+        # print('Error:', e)
         print('Please download celebA dataset')
 
 

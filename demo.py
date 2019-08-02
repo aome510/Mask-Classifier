@@ -41,13 +41,16 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
     font_scale = max(font_scale, 0.25)
     font_scale = min(font_scale, 1)
 
+    font_thickness = 1
+    if max(img_cp.shape[0], img_cp.shape[1]) > 1024: font_thickness = 2
+
     cv2.line(img_cp, (x, y), (x + len, y), (0, 211, 255), 2)
     cv2.putText(img_cp, 'Mask', (x + len + pad_x, y + pad_text),
-                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 1.5, lineType=cv2.LINE_AA)
+                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness, lineType=cv2.LINE_AA)
 
     cv2.line(img_cp, (x, y + pad_y), (x + len, y + pad_y), (0, 255, 0), 2)
     cv2.putText(img_cp, 'No-mask', (x + len + pad_x, y + pad_y + pad_text),
-                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 1.5, lineType=cv2.LINE_AA)
+                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness, lineType=cv2.LINE_AA)
     return img_cp
 
 
@@ -124,7 +127,7 @@ def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output
 if __name__ == "__main__":
     net = SSH_init()
 
-    demo_video(net, visualize=True)
+    # demo_video(net, visualize=True)
     
     # uncomment below to run demo on video
-    # demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
+    demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
