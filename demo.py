@@ -43,11 +43,11 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
 
     cv2.line(img_cp, (x, y), (x + len, y), (0, 211, 255), 2)
     cv2.putText(img_cp, 'Mask', (x + len + pad_x, y + pad_text),
-                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2, lineType=cv2.LINE_AA)
+                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 1.5, lineType=cv2.LINE_AA)
 
     cv2.line(img_cp, (x, y + pad_y), (x + len, y + pad_y), (0, 255, 0), 2)
     cv2.putText(img_cp, 'No-mask', (x + len + pad_x, y + pad_y + pad_text),
-                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 2, lineType=cv2.LINE_AA)
+                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), 1.5, lineType=cv2.LINE_AA)
     return img_cp
 
 
@@ -122,4 +122,4 @@ def demo_video(net, video_path=0, out_dir='./data/videos/output/output.avi', vis
 
 if __name__ == "__main__":
     net = SSH_init()
-    demo_video(net, '/home/khainb/G3/Mask Classifier/data/videos/demo2.MOV', visualize=True)
+    demo_video(net, '/home/khainb/G3/MAFA/data/videos/IMG_0685.MOV', visualize=True)

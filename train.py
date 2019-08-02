@@ -7,9 +7,13 @@ from keras.applications import resnet50, inception_resnet_v2
 from keras.applications.resnet50 import ResNet50
 from keras.applications.inception_resnet_v2 import InceptionResNetV2
 from func import tf_init, plot_training, get_model_memory_usage
+import os
 
 
 def train(type):  # we deploy two networks resnet50 and inceptionresnet_v2
+    os.system('mkdir ./model/snapshot/')
+    os.system('mkdir ./model/output/')
+
     if type == 'resnet50':
         csize = 224
         batch_size = 32
