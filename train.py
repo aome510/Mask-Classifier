@@ -11,6 +11,7 @@ import os
 
 
 def train(type):  # we deploy two networks resnet50 and inceptionresnet_v2
+    os.system('mkdir ./model/')
     os.system('mkdir ./model/snapshot/')
     os.system('mkdir ./model/output/')
 

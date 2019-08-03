@@ -130,4 +130,4 @@ if __name__ == "__main__":
     demo_video(net, visualize=True)
     
     # uncomment below to run demo on video
-    #demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
+    # demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
