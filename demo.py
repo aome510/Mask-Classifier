@@ -12,9 +12,26 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
         img = cv2.imread(img_path)
     img_cp = img.copy()
 
+    len_line = int(img_cp.shape[1] / 5)
+    pad_percent = int(img_cp.shape[1] / 2)
+    x = int(img_cp.shape[1] / 25)
+    y = int(img_cp.shape[0] / 25)
+    pad_x = int(img_cp.shape[1] / 60)
+    pad_y = int(img_cp.shape[0] / 30)
+    pad_text = 5
+    font_scale = (img_cp.shape[0] * img_cp.shape[1]) / (750 * 750)
+    font_scale = max(font_scale, 0.25)
+    font_scale = min(font_scale, 1)
+
+    font_thickness = 1
+    if max(img_cp.shape[0], img_cp.shape[1]) > 1024: font_thickness = 2
+
     if bboxs.shape[0] == 0: return img
     bboxs = bboxs[np.where(bboxs[:, -1] > thresh)[0]]
     bboxs = bboxs.astype(int)
+
+    cnt_mask = 0
+    cnt_nomask = 0
 
     for bbox in bboxs:
         img_bbox = img[bbox[1]:bbox[3], bbox[0]:bbox[2], :]
@@ -25,31 +42,25 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
         cv2.imwrite('./data/cropped.jpg', img_bbox)
         (type, prob) = classify('./data/cropped.jpg')
         cv2.putText(img_cp, '{0:.2f}'.format(prob), (bbox[0] + 7, bbox[1] - 3),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2, lineType=cv2.LINE_AA)
+                    cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 255), font_thickness, lineType=cv2.LINE_AA)
+
+        if type == 0: cnt_mask += 1
+        else: cnt_nomask += 1
 
         color = (0, 255, 0) if type else (0, 211, 255)
 
         cv2.rectangle(img_cp, (bbox[0], bbox[1]), (bbox[2], bbox[3]), color, 2)
 
-    len = int(img_cp.shape[1] / 5)
-    x = int(img_cp.shape[1] / 25)
-    y = int(img_cp.shape[0] / 25)
-    pad_x = int(img_cp.shape[1] / 60)
-    pad_y = int(img_cp.shape[0] / 30)
-    pad_text = 5
-    font_scale = (img_cp.shape[0] * img_cp.shape[1]) / (1000 * 1000)
-    font_scale = max(font_scale, 0.25)
-    font_scale = min(font_scale, 1)
-
-    font_thickness = 1
-    if max(img_cp.shape[0], img_cp.shape[1]) > 1024: font_thickness = 2
-
-    cv2.line(img_cp, (x, y), (x + len, y), (0, 211, 255), 2)
-    cv2.putText(img_cp, 'Mask', (x + len + pad_x, y + pad_text),
+    cv2.line(img_cp, (x, y), (x + len_line, y), (0, 211, 255), 2)
+    cv2.putText(img_cp, 'Mask', (x + len_line + pad_x, y + pad_text),
                 cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness, lineType=cv2.LINE_AA)
 
-    cv2.line(img_cp, (x, y + pad_y), (x + len, y + pad_y), (0, 255, 0), 2)
-    cv2.putText(img_cp, 'No-mask', (x + len + pad_x, y + pad_y + pad_text),
+    cv2.line(img_cp, (x, y + pad_y), (x + len_line, y + pad_y), (0, 255, 0), 2)
+    cv2.putText(img_cp, 'No-mask', (x + len_line + pad_x, y + pad_y + pad_text),
+                cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness, lineType=cv2.LINE_AA)
+    
+    mask_percent = (0 if cnt_mask == 0 else (cnt_mask / (cnt_mask + cnt_nomask))) * 100
+    cv2.putText(img_cp, 'Mask percent: {:.0f}%'.format(mask_percent), (x + pad_percent, y + pad_text),
                 cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 0), font_thickness, lineType=cv2.LINE_AA)
     return img_cp
 
@@ -120,7 +131,8 @@ def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output
         if ret == False: break
 
     cap.release()
-    out.release()
+    if save_out:
+        out.release()
     cv2.destroyAllWindows()
 
 
