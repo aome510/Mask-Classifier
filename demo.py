@@ -34,13 +34,12 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
     cnt_nomask = 0
 
     for bbox in bboxs:
-        img_bbox = img[bbox[1]:bbox[3], bbox[0]:bbox[2], :]
+        img_bbox = img[bbox[1]:bbox[3], bbox[0]:bbox[2], [2, 1, 0]]
 
         if img_bbox.shape[0] * img_bbox.shape[1] < max_size:
             continue
 
-        cv2.imwrite('cropped.jpg', img_bbox)
-        (type, prob) = classify('cropped.jpg')
+        (type, prob) = classify(img_arr=img_bbox)
         cv2.putText(img_cp, '{0:.2f}'.format(prob), (bbox[0] + 7, bbox[1] - 3),
                     cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 255), font_thickness, lineType=cv2.LINE_AA)
 
@@ -142,4 +141,4 @@ if __name__ == "__main__":
     demo_video(net, visualize=True)
     
     # uncomment below to run demo on video
-    # demo_video(net, './data/videos/demo1.MOV', save_out=True, visualize=True)
+    # demo_video(net, './data/videos/demo2.MOV', save_out=True, visualize=True)

@@ -13,22 +13,22 @@ model = load_model('./model/resnet50.h5')
 model_type = 'resnet50'
 csize = 224
 
-def classify(img_path, thresh=0.5):
-    start_time = time.time()
+def classify(img_path='', img_arr=None, thresh=0.5):
+    if img_arr is None:
+        img_arr = img_to_array(
+            load_img(img_path, target_size=(csize, csize))
+        )
+    else:
+        img_arr = cv2.resize(img_arr, (csize, csize), interpolation=cv2.INTER_NEAREST)
 
-    img_arr = img_to_array(
-        load_img(img_path, target_size=(csize, csize))
-    )
     img_arr = np.expand_dims(img_arr, axis=0)
+
     if model_type == 'resnet50':
         img_arr = resnet50.preprocess_input(img_arr)
     else:
         img_arr = inception_resnet_v2.preprocess_input(img_arr)
 
     match = model.predict(img_arr)
-
-    #print('Classifying took', time.time() - start_time)
-
     return (1 if match[0][0] > thresh else 0, match[0][0])
 
 
