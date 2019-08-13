@@ -39,8 +39,8 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
         if img_bbox.shape[0] * img_bbox.shape[1] < max_size:
             continue
 
-        cv2.imwrite('./data/cropped.jpg', img_bbox)
-        (type, prob) = classify('./data/cropped.jpg')
+        cv2.imwrite('cropped.jpg', img_bbox)
+        (type, prob) = classify('cropped.jpg')
         cv2.putText(img_cp, '{0:.2f}'.format(prob), (bbox[0] + 7, bbox[1] - 3),
                     cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 255), font_thickness, lineType=cv2.LINE_AA)
 
@@ -104,7 +104,7 @@ def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output
         if frame is not None and frame.shape[0] > 0 and frame.shape[1] > 0:
             start_time = time.time()
 
-            # with videos we don't use pyramid option to improve performance
+            # with videos we don't use SSH pyramid option to improve performance
             bboxs = detect(net, im=frame)[0]
             frame = draw(None, bboxs, img=frame)
 
