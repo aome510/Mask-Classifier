@@ -49,9 +49,9 @@ If you want to demo on videos, you can download our demo videos from [here](http
 3. MAFA dataset:
     
     You can download MAFA dataset from [here](https://drive.google.com/drive/folders/1nbtM1n0--iZ3VVbNGhocxbnBGhMau_OG) and then save it into a folder named ```data/MAFA/```
-4. Mask Classifier dataset:
+4. Mask Classifier dataset (our dataset):
     
-    You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1goKcsB8TQ0hWUzg3DymQyR2S8da186kY) and then save it into a folder name ```data/mask_classifier/```
+    You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1WLKCLvR_nXSsOUywqKixoetz03WoJ8cL) and then save it into a folder name ```data/mask_classifier/```
 
 ### Combine dataset:
 After downloading all the datasets listed above you can run:
