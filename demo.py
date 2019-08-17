@@ -16,15 +16,15 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
     pad_percent = int(img_cp.shape[1] / 2)
     x = int(img_cp.shape[1] / 25)
     y = int(img_cp.shape[0] / 25)
-    pad_x = int(img_cp.shape[1] / 60)
-    pad_y = int(img_cp.shape[0] / 30)
+    pad_x = int(img_cp.shape[1] / 50)
+    pad_y = int(img_cp.shape[0] / 25)
     pad_text = 5
     font_scale = (img_cp.shape[0] * img_cp.shape[1]) / (750 * 750)
     font_scale = max(font_scale, 0.25)
-    font_scale = min(font_scale, 1)
+    font_scale = min(font_scale, 0.75)
 
     font_thickness = 1
-    if max(img_cp.shape[0], img_cp.shape[1]) > 1024: font_thickness = 2
+    if max(img_cp.shape[0], img_cp.shape[1]) > 750: font_thickness = 2
 
     if bboxs.shape[0] == 0: return img
     bboxs = bboxs[np.where(bboxs[:, -1] > thresh)[0]]
@@ -40,8 +40,12 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
             continue
 
         (type, prob) = classify(img_arr=img_bbox)
+        prob_font_scale = (img_bbox.shape[0] * img_bbox.shape[1]) / (100 * 100)
+        prob_font_scale = max(prob_font_scale, 0.25)
+        prob_font_scale = min(prob_font_scale, 0.75)
+
         cv2.putText(img_cp, '{0:.2f}'.format(prob), (bbox[0] + 7, bbox[1] - 3),
-                    cv2.FONT_HERSHEY_SIMPLEX, font_scale, (0, 0, 255), font_thickness, lineType=cv2.LINE_AA)
+                    cv2.FONT_HERSHEY_SIMPLEX, prob_font_scale, (0, 0, 255), 1, lineType=cv2.LINE_AA)
 
         if type == 0: cnt_mask += 1
         else: cnt_nomask += 1
@@ -64,9 +68,10 @@ def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
     return img_cp
 
 
-def demo_from_file(path, net):
+def demo_from_file(path, net, save_out=False, out_dir=None):
     imgs = open(path, 'r').readlines()
 
+    id = 0
     for img_path in imgs:
         img_path = img_path.strip().split(' ')[0]
 
@@ -74,20 +79,29 @@ def demo_from_file(path, net):
         img = draw(img_path, bboxs)
         im_show(img)
 
+        if save_out and not out_dir is None:
+            id += 1
+            cv2.imwrite(out_dir + str(id).zfill(5) + '.jpg', img)
 
-def demo_from_dir(dir, net):
+
+def demo_from_dir(dir, net, save_out=False, out_dir=None):
     imgs = [
         file
         for file in os.listdir(dir)
         if file.endswith('.jpg')
     ]
 
+    id = 0
     for img_path in imgs:
         img_path = dir + img_path
 
         bboxs = detect(net, img_path, pyramid=True)[0]
         img = draw(img_path, bboxs)
         im_show(img)
+        
+        if save_out and not out_dir is None:
+            id += 1
+            cv2.imwrite(out_dir + str(id).zfill(5) + '.jpg', img)
 
 
 def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output.avi', visualize=False):

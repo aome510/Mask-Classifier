@@ -2,7 +2,14 @@
 
 ## Introduction
 
-This repository contains the code for training and evaluating mask classifier model.
+This repository contains codes for training and evaluating mask classifier model.
+
+### Some of the results:
+
+[](./data/demo/output/00001.jpg)
+[](./data/demo/output/00002.jpg)
+[](./data/demo/output/00003.jpg)
+[](./data/demo/output/00004.jpg)
 
 ## Contents
 
@@ -26,7 +33,7 @@ pip install -r requirements.txt
 
 <a name="demo"></a>
 ## Running the demo
-To run the demo, first you need to download the pre-trained mask classifier model from [here](https://drive.google.com/file/d/1Ogew-mbiMqznzO3ok_T-IiqQGpq4OHw5/view) and then save it into a folder named ```model/```.
+To run the demo, first you need to download the pre-trained mask classifier model from [here](https://drive.google.com/file/d/1Ogew-mbiMqznzO3ok_T-IiqQGpq4OHw5) and then save it into a folder named ```model/```.
 
 After downloading the model, you can run demo on webcam with:
 ```
