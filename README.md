@@ -6,10 +6,10 @@ This repository contains codes for training and evaluating mask classifier model
 
 ### Some of the results:
 
-[](./data/demo/output/00001.jpg)
-[](./data/demo/output/00002.jpg)
-[](./data/demo/output/00003.jpg)
-[](./data/demo/output/00004.jpg)
+![](./data/demo/output/00001.jpg)
+![](./data/demo/output/00002.jpg)
+![](./data/demo/output/00003.jpg)
+![](./data/demo/output/00004.jpg)
 
 ## Contents
 
