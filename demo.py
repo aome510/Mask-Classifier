@@ -7,7 +7,7 @@ from func import im_show, SSH_init
 from deploy import classify
 
 
-def draw(img_path, bboxs, img=None, thresh=0.5, max_size=100):
+def draw(img_path, bboxs, img=None, thresh=0.5, max_size=0):
     if img is None:
         img = cv2.imread(img_path)
     img_cp = img.copy()
@@ -123,10 +123,11 @@ def demo_video(net, video_path=0, save_out=False, out_path='./data/videos/output
 
             print("FPS: ", 1.0 / (time.time() - start_time))
 
-            if save_out and out is None:
-                out = cv2.VideoWriter(
-                    out_path, fourcc, 20.0,
-                    (frame.shape[1], frame.shape[0]))
+            if save_out:
+                if out is None:
+                    out = cv2.VideoWriter(
+                        out_path, fourcc, 20.0,
+                        (frame.shape[1], frame.shape[0]))
                 out.write(frame)
 
             if visualize:
@@ -155,4 +156,4 @@ if __name__ == "__main__":
     demo_video(net, visualize=True)
     
     # uncomment below to run demo on video
-    # demo_video(net, './data/videos/demo2.MOV', save_out=True, visualize=True)
+    # demo_video(net, './data/videos/demo3.MOV', save_out=True, visualize=True)
