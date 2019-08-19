@@ -3,4 +3,5 @@
 data/*
 !data/demo
 *.caffemodel
-paper
+paper/*
+!paper/paper.pdf

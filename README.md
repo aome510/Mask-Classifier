@@ -4,6 +4,7 @@
 
 This repository contains codes for training and evaluating mask classifier model.
 Please note that our implementation is mostly based on python3.
+Please read our paper at [here](./paper/paper.pdf) for further details on preparing datasets as well as training-testing the model.
 
 ### Some of the results:
 
