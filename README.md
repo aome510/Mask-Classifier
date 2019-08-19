@@ -3,6 +3,7 @@
 ## Introduction
 
 This repository contains codes for training and evaluating mask classifier model.
+Please note that our implementation mostly based on python3.
 
 ### Some of the results:
 
