@@ -64,17 +64,17 @@ If you want to demo on videos, you can download our demo videos from [here](http
 
 ### Prepare dataset
 
-1. CelebA dataset:
+1. ***CelebA*** dataset:
 
     You can download CelebA dataset from [here](https://www.kaggle.com/jessicali9530/celeba-dataset) and then save it into a folder named ```data/celebA/```
 
-2. WiderFace dataset:
+2. ***WiderFace*** dataset:
 
     You can download WiderFace dataset from [here](https://drive.google.com/open?id=16a0TSvPI_3up7tbblxTHxXj5hZ9N7RyH) and then save it into a folder named ```data/WiderFace/```
-3. MAFA dataset:
+3. ***MAFA*** dataset:
 
     You can download MAFA dataset from [here](https://drive.google.com/drive/folders/1nbtM1n0--iZ3VVbNGhocxbnBGhMau_OG) and then save it into a folder named ```data/MAFA/```
-4. Mask Classifier dataset (our dataset):
+4. ***Mask Classifier*** dataset (our dataset):
 
     You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1WLKCLvR_nXSsOUywqKixoetz03WoJ8cL) and then save it into a folder name ```data/mask_classifier/```
 
