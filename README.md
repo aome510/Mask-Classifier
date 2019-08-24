@@ -2,12 +2,28 @@
 
 ## Introduction
 
-This repository contains codes for training and evaluating mask classifier model.
-Please note that our implementation is mostly based on python3.
-Please read our paper at [here](./paper/paper.pdf) for further details on preparing datasets as well as training-testing the model.
+This repository contains codes for training and evaluating the Mask Classifier model, which is mostly implemented in ***Python 3*** and ***Keras*** framework.
 
-### Some of the results:
+When training and testing the model, we mostly use [SSH](https://github.com/mahyarnajibi/SSH) to detect and crop face images.
 
+Please read our paper at [here](./paper/paper.pdf) for further details on preparing the datasets as well as training and testing the model.
+
+This project was supported by [VinAI research](https://www.vinai.io).
+## People
+
+Our team consists of four members including me (***Thang Pham***), ***Bao Tran***, ***Duy Pham***, and ***Long Nguyen***.
+
+This project was performed while the authors interned at [VinAI research](https://www.vinai.io/).
+
+## Model Performance
+
+Our team has tried different network architectures and trained on different frameworks such as ***PyTorch***, ***Keras***, and ***Caffe***.
+
+We observed that deploying ***ResNet50*** pretrained network brought us high accuracy model as well as fast training time.
+
+During the experiment, the Mask Classifer model can achieve about ***96.5%*** accuracy and a performance of ***10-15 FPS*** on a Nvidia's GeForce GTX Titan X machine.
+
+### Some of the results
 ![](./data/demo/output/00001.jpg)
 ![](./data/demo/output/00002.jpg)
 ![](./data/demo/output/00003.jpg)
@@ -46,33 +62,36 @@ If you want to demo on videos, you can download our demo videos from [here](http
 <a name="train"></a>
 ## Training a model
 
-### Prepare dataset:
+### Prepare dataset
 
 1. CelebA dataset:
 
     You can download CelebA dataset from [here](https://www.kaggle.com/jessicali9530/celeba-dataset) and then save it into a folder named ```data/celebA/```
 
 2. WiderFace dataset:
-    
+
     You can download WiderFace dataset from [here](https://drive.google.com/open?id=16a0TSvPI_3up7tbblxTHxXj5hZ9N7RyH) and then save it into a folder named ```data/WiderFace/```
 3. MAFA dataset:
-    
+
     You can download MAFA dataset from [here](https://drive.google.com/drive/folders/1nbtM1n0--iZ3VVbNGhocxbnBGhMau_OG) and then save it into a folder named ```data/MAFA/```
 4. Mask Classifier dataset (our dataset):
-    
+
     You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1WLKCLvR_nXSsOUywqKixoetz03WoJ8cL) and then save it into a folder name ```data/mask_classifier/```
 
-### Combine dataset:
+### Combine dataset
 After downloading all the datasets listed above you can run:
 ```
 python gen_data.py
 ```
 to combine datasets and split datasets for training and cross-validating model.
 
-### Train model:
+### Train model
 
 After preparing train and cross-val data, you can train model by:
 ```
 python train.py
 ```
-By default, we use resnet50 network to train. If you want to change network, you can modify ```train.py``` file. Currently, we only support resnet50 and reception_resnet_v2 networks. You can read [this](https://keras.io/applications/) if you want to train with diffrent networks.
+
+By default, we use ***resnet50*** network to train. You can change to ***reception_resnet_v2*** network by modifying ```train.py``` file.
+
+Please read [this](https://keras.io/applications/) if you want to train with diffrent network architectures.
