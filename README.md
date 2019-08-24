@@ -87,11 +87,11 @@ to combine datasets and split datasets for training and cross-validating model.
 
 ### Train model
 
-After preparing train and cross-val data, you can train model by:
+After preparing train and cross-val data, you can start training the model:
 ```
 python train.py
 ```
 
-By default, we use ***resnet50*** network to train. You can change to ***reception_resnet_v2*** network by modifying ```train.py``` file.
+By default, we use ***resnet50*** network to train the model. You can change to ***reception_resnet_v2*** network by modifying ```train.py``` file.
 
 Please read [this](https://keras.io/applications/) if you want to train with diffrent network architectures.
