@@ -53,16 +53,16 @@ pip install -r requirements.txt
 ## Running the demo
 To run the demo, first you need to download the pre-trained mask classifier model from [here](https://drive.google.com/file/d/1Ogew-mbiMqznzO3ok_T-IiqQGpq4OHw5) and then save it into a folder named ```model/```.
 
-After downloading the model, you can run demo on webcam with:
+After downloading the model, you can run demo on webcam:
 ```
 python demo.py
 ```
 If you want to demo on videos, you can download our demo videos from [here](https://drive.google.com/drive/folders/1PSw1eDErcjLaOkIUxYXbLEacBNdaMjHQ) and then save it into a folder named ```data/videos/```. After that, you can modify ```demo.py``` file to run demo on videos.
 
 <a name="train"></a>
-## Training a model
+## Training the model
 
-### Prepare dataset
+### Preparing the datasets
 
 1. ***CelebA*** dataset:
 
@@ -78,14 +78,14 @@ If you want to demo on videos, you can download our demo videos from [here](http
 
     You can download Mask Classifier dataset from [here](https://drive.google.com/open?id=1WLKCLvR_nXSsOUywqKixoetz03WoJ8cL) and then save it into a folder name ```data/mask_classifier/```
 
-### Combine dataset
+### Combining the datasets
 After downloading all the datasets listed above you can run:
 ```
 python gen_data.py
 ```
 to combine datasets and split datasets for training and cross-validating model.
 
-### Train model
+### Training the model
 
 After preparing train and cross-val data, you can start training the model:
 ```
